@@ -13,8 +13,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  lint-and-build:
-    name: Lint and Build
+  setup:
+    name: Setup and Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,6 +28,41 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Cache node_modules
+        uses: actions/cache/save@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Build library
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  lint:
+    name: Lint and Format Check
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Restore node_modules
+        uses: actions/cache/restore@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Run ESLint
         run: npm run lint
@@ -35,8 +70,24 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
-      - name: Build library
-        run: npm run build
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Restore node_modules
+        uses: actions/cache/restore@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Build Storybook
         run: npm run build-storybook
@@ -44,6 +95,7 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
+    needs: setup
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,10 +104,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache/restore@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Run tests
         run: npm run test --if-present || echo "No tests configured yet"
@@ -63,21 +117,16 @@ jobs:
   bundle-size:
     name: Check Bundle Size
     runs-on: ubuntu-latest
+    needs: setup
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
+          name: dist
+          path: dist/
 
       - name: Check bundle size
         run: |
