@@ -3,6 +3,24 @@
   "private": false,
   "version": "0.1.0",
   "type": "module",
+  "description": "Component library built with PatternFly and customizable design tokens",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Discordante/library-test.git"
+  },
+  "author": "discordante",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Discordante/library-test/issues"
+  },
+  "homepage": "https://discordante.github.io/library-test/",
+  "keywords": [
+    "react",
+    "components",
+    "patternfly",
+    "design-tokens",
+    "ui-library"
+  ],
   "main": "./dist/my-component-library.umd.js",
   "module": "./dist/my-component-library.es.js",
   "types": "./dist/index.d.ts",

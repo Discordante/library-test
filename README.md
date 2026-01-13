@@ -1,6 +1,11 @@
 # My Component Library
 
+[![GitHub release](https://img.shields.io/github/v/release/Discordante/library-test)](https://github.com/Discordante/library-test/releases)
+[![Storybook](https://img.shields.io/badge/Storybook-View%20Components-ff4785?logo=storybook)](https://discordante.github.io/library-test/)
+
 Librería de componentes React basada en PatternFly con sistema de tokens inyectables.
+
+📚 **[Ver componentes en Storybook](https://discordante.github.io/library-test/)**
 
 ## Características
 
@@ -12,6 +17,23 @@ Librería de componentes React basada en PatternFly con sistema de tokens inyect
 - Tree-shaking optimizado
 
 ## Instalación
+
+### Desde GitHub Packages
+
+Este paquete está disponible en GitHub Packages. Primero, configura npm para usar GitHub Packages:
+
+```bash
+# Crea o edita ~/.npmrc y añade:
+@discordante:registry=https://npm.pkg.github.com
+```
+
+Luego instala el paquete:
+
+```bash
+npm install @discordante/my-component-library @patternfly/react-core @patternfly/react-styles
+```
+
+### Desde npm (próximamente)
 
 ```bash
 npm install my-component-library @patternfly/react-core @patternfly/react-styles
@@ -228,11 +250,13 @@ function MyComponent() {
 ### Scripts disponibles
 
 ```bash
-npm run build        # Compila la librería
-npm run lint         # Ejecuta ESLint
-npm run lint:fix     # Arregla errores de ESLint
-npm run format       # Formatea código con Prettier
-npm run format:check # Verifica formato
+npm run build            # Compila la librería
+npm run lint             # Ejecuta ESLint
+npm run lint:fix         # Arregla errores de ESLint
+npm run format           # Formatea código con Prettier
+npm run format:check     # Verifica formato
+npm run storybook        # Ejecuta Storybook en desarrollo
+npm run build-storybook  # Compila Storybook para producción
 ```
 
 ### Git hooks (Husky)
@@ -273,22 +297,55 @@ my-component-library/
 └── vite.config.ts
 ```
 
-## Publicación
+## Publicación y Releases
 
-Antes de publicar en npm:
+Este proyecto usa GitHub Actions para automatizar releases y despliegues:
 
-1. Actualiza la versión en `package.json`
-2. Ejecuta `npm run build`
-3. Verifica que los tipos se hayan generado: `ls dist/*.d.ts`
-4. Publica con `npm publish`
+### Versionado automático
+
+El versionado sigue [Conventional Commits](https://www.conventionalcommits.org/):
+
+- `feat:` → Incrementa versión MINOR (0.1.0 → 0.2.0)
+- `fix:` → Incrementa versión PATCH (0.1.0 → 0.1.1)
+- `BREAKING CHANGE:` → Incrementa versión MAJOR (0.1.0 → 1.0.0)
+
+### Proceso de release
+
+1. Haz commit con formato convencional:
+
+   ```bash
+   git commit -m "feat: add new Card component"
+   ```
+
+2. Push a main:
+
+   ```bash
+   git push
+   ```
+
+3. GitHub Actions automáticamente:
+   - Crea una nueva release en GitHub
+   - Publica el paquete en GitHub Packages
+   - Despliega Storybook actualizado a GitHub Pages
+
+### Instalación desde GitHub Packages
+
+Los usuarios pueden instalar versiones publicadas:
+
+```bash
+npm install @discordante/my-component-library@latest
+```
 
 ## Roadmap
 
 - [ ] Añadir más componentes (Card, Input, Modal, etc.)
 - [ ] Integrar con librería de design tokens externa
 - [ ] Añadir tests con Vitest
-- [ ] Añadir Storybook para documentación
+- [x] Añadir Storybook para documentación
+- [x] CI/CD con GitHub Actions
+- [x] Publicación automática en GitHub Packages
 - [ ] Soporte para temas dark/light
+- [ ] Publicar en npm público
 
 ## Licencia
 
