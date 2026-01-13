@@ -72,6 +72,7 @@ export const Large: Story = {
  * Visualiza las diferencias de tamaño alineadas verticalmente.
  */
 export const AllSizes: Story = {
+  args: {},
   render: () => (
     <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
       <Button variant="primary" size="sm">
@@ -99,6 +100,7 @@ export const AllSizes: Story = {
  * Muestra cómo los tamaños se adaptan a cada variante.
  */
 export const SizesByVariant: Story = {
+  args: {},
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>

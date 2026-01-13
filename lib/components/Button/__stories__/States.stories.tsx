@@ -86,6 +86,7 @@ export const Block: Story = {
  * Visualiza los diferentes estados del botón en una misma vista.
  */
 export const AllStates: Story = {
+  args: {},
   render: () => (
     <div
       style={{
@@ -124,6 +125,7 @@ export const AllStates: Story = {
  * Muestra cómo cada estado se ve en las diferentes variantes.
  */
 export const StatesByVariant: Story = {
+  args: {},
   render: () => (
     <div
       style={{
@@ -219,6 +221,7 @@ const FormExampleComponent = () => {
  * Simula un flujo típico de submit con estados.
  */
 export const FormExample: Story = {
+  args: {},
   render: () => <FormExampleComponent />,
   parameters: {
     layout: 'padded',

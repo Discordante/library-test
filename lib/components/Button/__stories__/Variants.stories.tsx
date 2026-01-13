@@ -91,6 +91,7 @@ export const Link: Story = {
  * Visualiza todas las opciones en un solo lugar.
  */
 export const AllVariants: Story = {
+  args: {},
   render: () => (
     <div
       style={{

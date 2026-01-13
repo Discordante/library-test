@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import type { ThemeTokens } from '../../../tokens'
 import { Button } from '../Button'
 import { ThemeProvider } from '../../../providers'
 
@@ -29,6 +30,7 @@ type Story = StoryObj<typeof meta>
  * Sin personalización, usa los valores por defecto de PatternFly.
  */
 export const DefaultTheme: Story = {
+  args: {},
   render: () => (
     <ThemeProvider>
       <div style={{ display: 'flex', gap: '8px' }}>
@@ -45,16 +47,19 @@ export const DefaultTheme: Story = {
  * Ejemplo inspirado en Material Design con colores vibrantes.
  */
 export const MaterialTheme: Story = {
+  args: {},
   render: () => (
     <ThemeProvider
-      theme={{
-        colors: {
-          primary: '#6200ee',
-          primaryText: '#ffffff',
-          secondary: '#03dac6',
-          secondaryText: '#000000',
-        },
-      }}
+      theme={
+        {
+          colors: {
+            primary: '#6200ee',
+            primaryText: '#ffffff',
+            secondary: '#03dac6',
+            secondaryText: '#000000',
+          },
+        } as Partial<ThemeTokens>
+      }
     >
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
         <Button variant="primary">Material Primary</Button>
@@ -70,6 +75,7 @@ export const MaterialTheme: Story = {
  * Paleta de colores para modo oscuro.
  */
 export const DarkTheme: Story = {
+  args: {},
   render: () => (
     <div
       style={{
@@ -79,14 +85,16 @@ export const DarkTheme: Story = {
       }}
     >
       <ThemeProvider
-        theme={{
-          colors: {
-            primary: '#bb86fc',
-            primaryText: '#000000',
-            secondary: '#03dac6',
-            secondaryText: '#000000',
-          },
-        }}
+        theme={
+          {
+            colors: {
+              primary: '#bb86fc',
+              primaryText: '#000000',
+              secondary: '#03dac6',
+              secondaryText: '#000000',
+            },
+          } as Partial<ThemeTokens>
+        }
       >
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <Button variant="primary">Dark Primary</Button>
@@ -106,18 +114,21 @@ export const DarkTheme: Story = {
  * Ejemplo con colores de marca personalizados.
  */
 export const BrandTheme: Story = {
+  args: {},
   render: () => (
     <ThemeProvider
-      theme={{
-        colors: {
-          primary: '#ff4081',
-          primaryText: '#ffffff',
-          secondary: '#7c4dff',
-          secondaryText: '#ffffff',
-          danger: '#f44336',
-          dangerText: '#ffffff',
-        },
-      }}
+      theme={
+        {
+          colors: {
+            primary: '#ff4081',
+            primaryText: '#ffffff',
+            secondary: '#7c4dff',
+            secondaryText: '#ffffff',
+            danger: '#f44336',
+            dangerText: '#ffffff',
+          },
+        } as Partial<ThemeTokens>
+      }
     >
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
         <Button variant="primary">Brand Primary</Button>
@@ -133,16 +144,19 @@ export const BrandTheme: Story = {
  * Estilo minimalista con colores sutiles.
  */
 export const MinimalTheme: Story = {
+  args: {},
   render: () => (
     <ThemeProvider
-      theme={{
-        colors: {
-          primary: '#2c2c2c',
-          primaryText: '#ffffff',
-          secondary: '#f5f5f5',
-          secondaryText: '#2c2c2c',
-        },
-      }}
+      theme={
+        {
+          colors: {
+            primary: '#2c2c2c',
+            primaryText: '#ffffff',
+            secondary: '#f5f5f5',
+            secondaryText: '#2c2c2c',
+          },
+        } as Partial<ThemeTokens>
+      }
     >
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
         <Button variant="primary">Minimal Primary</Button>
@@ -158,6 +172,7 @@ export const MinimalTheme: Story = {
  * Visualiza cómo el mismo botón se adapta a diferentes temas.
  */
 export const MultipleThemes: Story = {
+  args: {},
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
@@ -192,14 +207,16 @@ export const MultipleThemes: Story = {
       <div>
         <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 600 }}>Brand Colors</h4>
         <ThemeProvider
-          theme={{
-            colors: {
-              primary: '#ff4081',
-              primaryText: '#ffffff',
-              secondary: '#7c4dff',
-              secondaryText: '#ffffff',
-            },
-          }}
+          theme={
+            {
+              colors: {
+                primary: '#ff4081',
+                primaryText: '#ffffff',
+                secondary: '#7c4dff',
+                secondaryText: '#ffffff',
+              },
+            } as Partial<ThemeTokens>
+          }
         >
           <div style={{ display: 'flex', gap: '8px' }}>
             <Button variant="primary">Primary</Button>
@@ -219,16 +236,19 @@ export const MultipleThemes: Story = {
  * Muestra cómo implementar un tema personalizado en tu aplicación.
  */
 export const CustomizationGuide: Story = {
+  args: {},
   render: () => (
     <ThemeProvider
-      theme={{
-        colors: {
-          primary: '#ff6b35',
-          primaryText: '#ffffff',
-          secondary: '#004e89',
-          secondaryText: '#ffffff',
-        },
-      }}
+      theme={
+        {
+          colors: {
+            primary: '#ff6b35',
+            primaryText: '#ffffff',
+            secondary: '#004e89',
+            secondaryText: '#ffffff',
+          },
+        } as Partial<ThemeTokens>
+      }
     >
       <div
         style={{
