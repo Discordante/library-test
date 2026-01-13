@@ -36,10 +36,14 @@
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "@patternfly/react-core": "^6.0.0",
+    "@patternfly/react-styles": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@patternfly/react-core": "^6.4.0",
+    "@patternfly/react-styles": "^6.4.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
