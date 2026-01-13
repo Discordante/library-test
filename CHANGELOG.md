@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/Discordante/library-test/compare/v1.0.0...v1.0.1) (2026-01-13)
+
+
+### Bug Fixes
+
+* **ci:** exclude CHANGELOG.md from Prettier validation ([5f11d98](https://github.com/Discordante/library-test/commit/5f11d985a9728bdf84cb83777078a702b8cbcd1d))
+* **stories:** resolve TypeScript errors in Button stories ([39a09b3](https://github.com/Discordante/library-test/commit/39a09b385b4e5d8c08db5c27cedb4ccfff23d4b9))
+
 ## 1.0.0 (2026-01-13)
 
 

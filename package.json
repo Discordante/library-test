@@ -1,7 +1,7 @@
 {
   "name": "my-component-library",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Component library built with PatternFly and customizable design tokens",
   "repository": {
