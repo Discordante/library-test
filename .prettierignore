@@ -5,3 +5,7 @@ coverage
 .git
 .vscode
 .idea
+
+# Generated files
+CHANGELOG.md
+storybook-static
