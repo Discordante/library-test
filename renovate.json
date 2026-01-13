@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "schedule": ["before 3am on Monday"],
+  "timezone": "Europe/Madrid",
+  "labels": ["dependencies"],
+  "assignees": ["Discordante"],
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 2,
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "major-update"],
+      "automerge": false
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "matchPackagePatterns": ["^@patternfly/"],
+      "groupName": "PatternFly packages"
+    },
+    {
+      "matchPackagePatterns": ["^@storybook/", "storybook"],
+      "groupName": "Storybook packages"
+    },
+    {
+      "matchPackagePatterns": ["eslint", "prettier"],
+      "groupName": "linting and formatting"
+    },
+    {
+      "matchPackageNames": ["react", "react-dom"],
+      "groupName": "React",
+      "automerge": false
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "automerge": true
+  },
+  "dependencyDashboard": true,
+  "semanticCommits": "enabled",
+  "commitMessagePrefix": "chore(deps):"
+}

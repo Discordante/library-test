@@ -261,8 +261,45 @@ npm run build-storybook  # Compila Storybook para producción
 
 ### Git hooks (Husky)
 
+- **commit-msg**: Valida que los mensajes de commit sigan [Conventional Commits](https://www.conventionalcommits.org/)
 - **pre-commit**: Ejecuta lint-staged (ESLint + Prettier en archivos staged)
 - **pre-push**: Ejecuta lint y build completo
+
+### Formato de commits
+
+Este proyecto usa [Conventional Commits](https://www.conventionalcommits.org/). Los commits deben seguir este formato:
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
+```
+
+**Tipos permitidos:**
+
+- `feat`: Nueva funcionalidad
+- `fix`: Corrección de bugs
+- `docs`: Cambios en documentación
+- `style`: Cambios de formato (sin afectar funcionalidad)
+- `refactor`: Refactorización de código
+- `perf`: Mejoras de rendimiento
+- `test`: Añadir o actualizar tests
+- `build`: Cambios en el sistema de build o dependencias
+- `ci`: Cambios en CI/CD
+- `chore`: Otros cambios que no modifican src o test
+
+**Ejemplos:**
+
+```bash
+feat: add Card component
+fix: resolve button hover state issue
+docs: update installation instructions
+feat(button)!: change API to accept new props
+
+BREAKING CHANGE: button now requires variant prop
+```
 
 ## Estructura del proyecto
 
@@ -336,6 +373,48 @@ Los usuarios pueden instalar versiones publicadas:
 npm install @discordante/my-component-library@latest
 ```
 
+## CI/CD y Automatización
+
+### Workflows de GitHub Actions
+
+Este proyecto incluye varios workflows automatizados:
+
+#### 🔄 CI (Continuous Integration)
+
+- Se ejecuta en cada **Pull Request** y push a **main**
+- Verifica lint, formato y build
+- Compila Storybook
+- Genera reporte de tamaño de bundle
+
+#### 🚀 Release and Deploy
+
+- Se ejecuta en cada push a **main**
+- Despliega Storybook a GitHub Pages automáticamente
+- Crea releases cuando hay cambios significativos
+- Publica el paquete en GitHub Packages
+
+#### 🔒 CodeQL Security Analysis
+
+- Escaneo de seguridad automático
+- Se ejecuta semanalmente y en cada PR
+- Detecta vulnerabilidades y problemas de seguridad
+
+### Renovate Bot
+
+El proyecto usa Renovate para mantener las dependencias actualizadas:
+
+- **Actualizaciones automáticas**: Minor y patch se mergean automáticamente
+- **Major updates**: Requieren revisión manual
+- **Agrupación inteligente**: PatternFly, Storybook, linting agrupados
+- **Schedule**: Lunes antes de las 3 AM (Europe/Madrid)
+- **Dashboard**: Revisa el dashboard de Renovate en las issues
+
+**Activar Renovate:**
+
+1. Instala [Renovate GitHub App](https://github.com/apps/renovate)
+2. Selecciona este repositorio
+3. Renovate creará automáticamente PRs de actualización
+
 ## Roadmap
 
 - [ ] Añadir más componentes (Card, Input, Modal, etc.)
@@ -344,6 +423,9 @@ npm install @discordante/my-component-library@latest
 - [x] Añadir Storybook para documentación
 - [x] CI/CD con GitHub Actions
 - [x] Publicación automática en GitHub Packages
+- [x] CodeQL security scanning
+- [x] Renovate para actualizaciones automáticas
+- [x] Commitlint para validar commits
 - [ ] Soporte para temas dark/light
 - [ ] Publicar en npm público
 
