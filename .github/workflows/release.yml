@@ -10,6 +10,7 @@ permissions:
   packages: write
   pages: write
   id-token: write
+  pull-requests: write
 
 concurrency:
   group: release-${{ github.ref }}
@@ -28,7 +29,6 @@ jobs:
         id: release
         with:
           release-type: node
-          package-name: my-component-library
 
   publish:
     name: Build and Publish Package
