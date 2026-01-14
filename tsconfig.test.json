@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "types": ["vitest"]
+  },
+  "include": ["lib/**/*.test.ts", "lib/**/*.test.tsx", "vitest.setup.ts", "vitest.shims.d.ts"]
+}
