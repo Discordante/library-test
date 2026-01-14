@@ -1,31 +1,42 @@
-import React from 'react'
-import { Button as PFButton } from '@patternfly/react-core'
+import { Button as PFButton, type ButtonProps as PFButtonProps } from '@patternfly/react-core'
 import { useTheme } from '../../providers'
 import { classNames } from '../../utils'
 import { getButtonStyles, getButtonStateClasses } from './Button.styles'
-import type { ButtonProps } from './Button.types'
+import type { ButtonProps, ButtonVariant } from './Button.types'
 
 /**
- * Componente Button que extiende PatternFly Button
- * y permite personalización mediante tokens inyectables
+ * Mapping from our ButtonVariant to PatternFly's variant prop
+ * This avoids unsafe type assertions
+ */
+const variantToPFVariant: Record<ButtonVariant, PFButtonProps['variant']> = {
+  primary: 'primary',
+  secondary: 'secondary',
+  tertiary: 'tertiary',
+  danger: 'danger',
+  link: 'link',
+}
+
+/**
+ * Button component that extends PatternFly Button
+ * and allows customization via injectable design tokens
  *
  * @example
- * // Uso básico
+ * // Basic usage
  * <Button variant="primary" size="md">Click me</Button>
  *
  * @example
- * // Con tema personalizado
+ * // With custom theme
  * <ThemeProvider theme={{ colors: { primary: '#ff0000' } }}>
  *   <Button variant="primary">Red button</Button>
  * </ThemeProvider>
  *
  * @example
- * // Con props de PatternFly
+ * // With PatternFly props
  * <Button variant="primary" isDisabled icon={<PlusIcon />}>
  *   Add item
  * </Button>
  */
-export const Button: React.FC<ButtonProps> = ({
+export function Button({
   variant = 'primary',
   size = 'md',
   isBlock = false,
@@ -33,16 +44,21 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   style,
   ...pfButtonProps
-}) => {
+}: ButtonProps): React.JSX.Element {
   const theme = useTheme()
 
-  // Genera estilos basados en tokens
+  // Generate styles based on tokens
   const tokenStyles = getButtonStyles(variant, size, theme, isBlock)
 
-  // Combina las clases CSS
-  const buttonClasses = classNames(getButtonStateClasses(variant), className)
+  // Combine CSS classes including interactive state classes
+  const buttonClasses = classNames(
+    'mcl-button',
+    `mcl-button--${variant}`,
+    getButtonStateClasses(variant),
+    className
+  )
 
-  // Combina estilos inline de tokens con estilos personalizados
+  // Combine inline token styles with custom styles
   const combinedStyles = {
     ...tokenStyles,
     ...style,
@@ -51,7 +67,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <PFButton
       {...pfButtonProps}
-      variant={variant as never}
+      variant={variantToPFVariant[variant]}
       className={buttonClasses}
       style={combinedStyles}
     >

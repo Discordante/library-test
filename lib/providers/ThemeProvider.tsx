@@ -1,24 +1,24 @@
-import React, { useMemo } from 'react'
+import { useMemo, type ReactNode } from 'react'
 import type { ThemeTokens } from '../tokens'
 import { defaultTheme } from '../tokens'
 import { ThemeContext } from './ThemeContext'
 
 export interface ThemeProviderProps {
-  children: React.ReactNode
+  children: ReactNode
   /**
-   * Tokens del tema personalizados
-   * Puedes sobrescribir parcialmente los tokens por defecto
+   * Custom theme tokens
+   * You can partially override the default tokens
    *
    * @example
-   * // Importa tus tokens desde tu librería externa
-   * import { myCustomTokens } from '@tu-empresa/design-tokens'
+   * // Import tokens from your external design tokens library
+   * import { myCustomTokens } from '@your-company/design-tokens'
    *
    * <ThemeProvider theme={myCustomTokens}>
    *   <App />
    * </ThemeProvider>
    *
    * @example
-   * // O sobrescribe solo algunos tokens
+   * // Or override only specific tokens
    * <ThemeProvider theme={{ colors: { primary: '#ff0000' } }}>
    *   <App />
    * </ThemeProvider>
@@ -27,34 +27,41 @@ export interface ThemeProviderProps {
 }
 
 /**
- * Provider para inyectar tokens de diseño en toda la aplicación
+ * Deep merge utility for theme tokens
+ * Ensures nested objects are properly merged without losing values
+ */
+function deepMergeTheme(base: ThemeTokens, overrides: Partial<ThemeTokens>): ThemeTokens {
+  return {
+    colors: { ...base.colors, ...(overrides.colors ?? {}) },
+    spacing: { ...base.spacing, ...(overrides.spacing ?? {}) },
+    typography: { ...base.typography, ...(overrides.typography ?? {}) },
+    borders: { ...base.borders, ...(overrides.borders ?? {}) },
+    shadows: { ...base.shadows, ...(overrides.shadows ?? {}) },
+  }
+}
+
+/**
+ * Provider for injecting design tokens throughout the application
  *
  * @example
- * // Uso básico con tema por defecto
+ * // Basic usage with default theme
  * <ThemeProvider>
  *   <App />
  * </ThemeProvider>
  *
  * @example
- * // Con tokens personalizados de tu librería externa
- * import { myTokens } from '@mi-empresa/design-tokens'
+ * // With custom tokens from your external library
+ * import { myTokens } from '@my-company/design-tokens'
  *
  * <ThemeProvider theme={myTokens}>
  *   <App />
  * </ThemeProvider>
  */
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, theme }) => {
-  // Merge deep de los tokens personalizados con los por defecto
+export function ThemeProvider({ children, theme }: ThemeProviderProps): React.JSX.Element {
+  // Deep merge custom tokens with defaults
   const mergedTheme = useMemo<ThemeTokens>(() => {
     if (!theme) return defaultTheme
-
-    return {
-      colors: { ...defaultTheme.colors, ...theme.colors },
-      spacing: { ...defaultTheme.spacing, ...theme.spacing },
-      typography: { ...defaultTheme.typography, ...theme.typography },
-      borders: { ...defaultTheme.borders, ...theme.borders },
-      shadows: { ...defaultTheme.shadows, ...theme.shadows },
-    }
+    return deepMergeTheme(defaultTheme, theme)
   }, [theme])
 
   return <ThemeContext.Provider value={mergedTheme}>{children}</ThemeContext.Provider>

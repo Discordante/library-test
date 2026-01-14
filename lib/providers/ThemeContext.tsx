@@ -3,20 +3,23 @@ import type { ThemeTokens } from '../tokens'
 import { defaultTheme } from '../tokens'
 
 /**
- * Context para los tokens del tema
+ * Context for theme tokens
+ * Defaults to defaultTheme so components work without ThemeProvider
  */
 export const ThemeContext = createContext<ThemeTokens>(defaultTheme)
 
 /**
- * Hook para acceder a los tokens del tema
+ * Hook to access theme tokens
  * @example
  * const { colors, spacing } = useTheme()
  * const buttonColor = colors.primary
+ *
+ * @returns The current theme tokens from context, or defaults if no provider
  */
-export const useTheme = () => {
+export function useTheme(): ThemeTokens {
   const context = useContext(ThemeContext)
   if (!context) {
-    throw new Error('useTheme debe usarse dentro de un ThemeProvider')
+    throw new Error('useTheme must be used within a ThemeProvider')
   }
   return context
 }

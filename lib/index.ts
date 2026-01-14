@@ -3,6 +3,9 @@
  * Librería de componentes React basada en PatternFly con sistema de tokens inyectables
  */
 
+// Styles - imported for side effects (will be extracted to dist/style.css)
+import './styles/index.css'
+
 // Componentes
 export * from './components'
 

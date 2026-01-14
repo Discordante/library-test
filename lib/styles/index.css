@@ -1,0 +1,69 @@
+/**
+ * My Component Library - Base Styles
+ * This file provides interactive states (focus, hover, active) for themed components
+ */
+
+/* Button focus styles for accessibility */
+.mcl-button:focus-visible {
+  outline: 2px solid var(--mcl-focus-color, #0066cc);
+  outline-offset: 2px;
+}
+
+.mcl-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Button hover/active states using CSS custom properties */
+.mcl-button--primary:hover:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.mcl-button--primary:active:not(:disabled) {
+  filter: brightness(0.8);
+}
+
+.mcl-button--secondary:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.mcl-button--secondary:active:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.mcl-button--tertiary:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.mcl-button--tertiary:active:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.mcl-button--danger:hover:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.mcl-button--danger:active:not(:disabled) {
+  filter: brightness(0.8);
+}
+
+.mcl-button--link:hover:not(:disabled) {
+  text-decoration: none;
+  filter: brightness(0.8);
+}
+
+.mcl-button--link:active:not(:disabled) {
+  filter: brightness(0.7);
+}
+
+/* Disabled state */
+.mcl-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .mcl-button {
+    transition: none;
+  }
+}

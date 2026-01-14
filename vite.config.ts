@@ -33,6 +33,7 @@ export default defineConfig({
       name: 'MyComponentLibrary',
       formats: ['es', 'umd'],
       fileName: format => `my-component-library.${format}.js`,
+      cssFileName: 'style',
     },
     rollupOptions: {
       external: [
