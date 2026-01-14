@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/Discordante/library-test/compare/v1.0.1...v1.1.0) (2026-01-14)
+
+
+### Features
+
+* **test:** add unit testing infrastructure with Vitest and Testing Library ([b5b424a](https://github.com/Discordante/library-test/commit/b5b424a2b856dfd6be20061d52a58da8bcceaca2))
+
+
+### Bug Fixes
+
+* resolve critical and high severity issues ([3b32b97](https://github.com/Discordante/library-test/commit/3b32b97c108ea2a32afe376832dd46be67803408))
+* **stories:** add required children prop to stories with custom render ([197dbfd](https://github.com/Discordante/library-test/commit/197dbfd0097fab5959bb8773decb4f7d536cd42c))
+
 ## [1.0.1](https://github.com/Discordante/library-test/compare/v1.0.0...v1.0.1) (2026-01-13)
 
 
